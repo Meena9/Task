@@ -1,0 +1,53 @@
+<html>
+<head>
+<style>
+table{}
+tr,td{
+height:100;
+width:100;
+}
+</style>
+<script>
+function gamegenrate(){
+var table='';
+var row=document.getElementById("row").value;
+var col=document.getElementById("col").value;
+
+	var random = Math.random( ); 
+    
+for(var i=1;i<=row;i++){
+table+='<tr>'
+for(var j=1;j<=col;j++){
+table+='<td>'+
+
+    random 
++'</td>'
+
+}
+table+='</tr>'
+}
+
+   
+document.getElementById("t").innerHTML='<table  border=1>'+table+'</table>';
+
+
+}
+
+
+
+</script>
+</head>
+<body>
+<center>
+Enter the no of rows :<input type="text" id="row"><br><br>
+Enter the no of cols :<input type="text" id="col"><br><br>
+<button onclick="gamegenrate()"> Genrate game</button><br><br>
+<div id="t">
+<div id='i'><img src="1200x630bb_vokqee.jpg"id="image1">
+<img src="mushroom-512_f9ma5t.png" id="image2">
+
+</div>
+</div>
+</center>
+</body>
+</html>
