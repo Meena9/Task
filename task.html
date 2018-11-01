@@ -9,29 +9,84 @@ width:100;
 </style>
 <script>
 function gamegenrate(){
-var table='';
 var row=document.getElementById("row").value;
 var col=document.getElementById("col").value;
 
-	
-    
+var table='';
+
 for(var i=1;i<=row;i++){
 table+='<tr>'
 for(var j=1;j<=col;j++){
-table+='<td>'+
-
-   ' <img src="mushroom-512_f9ma5t.png">'
-+'</td>'
-
+table+='<td>'+ +'</td>'
 }
 table+='</tr>'
 }
-
-   
+ 
 document.getElementById("t").innerHTML='<table  border=1>'+table+'</table>';
-
-
 }
+
+function Random(){
+var row=document.getElementById("row").value;
+var col=document.getElementById("col").value;
+var a=[];
+var b=[];
+for(var k=0;k<3;k++){
+
+ a[k]=Math.floor((Math.random() * row)+1);
+b[k]=Math.floor((Math.random() * col)+1);
+}
+for(var l=0;l<3;l++){
+document.write(a[l]);
+document.write(b[l]);
+}
+}
+(function (window, document, drawModule, undefined) {
+
+var btn = document.getElementById('btn');
+btn.addEventListener("click", function(){ drawModule.init();});
+
+	document.onkeydown = function(event) {
+
+        keyCode = window.event.keyCode; 
+        keyCode = event.keyCode;
+
+        switch(keyCode) {
+        
+        case 37: 
+          if (direction != 'right') {
+            direction = 'left';
+          }
+          console.log('left'); 
+          break;
+
+        case 39:
+          if (direction != 'left') {
+          direction = 'right';
+          console.log('right');
+          }
+          break;
+
+        case 38:
+          if (direction != 'down') {
+          direction = 'up';
+          console.log('up');
+          }
+          break;
+
+        case 40:
+          if (direction != 'up') {
+          direction = 'down';
+          console.log('down');
+          }
+          break;
+          }
+      }
+
+
+})(window, document, drawModule);
+
+
+
 
 
 
