@@ -13,6 +13,7 @@ var row=document.getElementById("row").value;
 var col=document.getElementById("col").value;
 var a=[];
 var b=[];
+
 for(var k=0;k<4;k++){
 
  a[k]=Math.floor((Math.random() * row)+1);
@@ -24,13 +25,13 @@ for(var i=1;i<=row;i++){
 table+='<tr>'
 for(var j=1;j<=col;j++){
 if(i==a[0]& j==b[0]){
-table+='<td id='+i+j+'>'+'<img src="1200x630bb_vokqee.jpg" id=mario>' +'</td>'
+table+='<td id='+i+-+j+'>'+'<img src="1200x630bb_vokqee.jpg" id=mario>' +'</td>'
 }
 else if((i==a[1]&j==b[1])|(i==a[2]&j==b[2])|(i==a[3]&j==b[3])){
-table+='<td id='+i+j+'>' +'<img src="mushroom-512_f9ma5t.png">' +'</td>'
+table+='<td id='+i+-+j+'>' +'<img src="mushroom-512_f9ma5t.png">' +'</td>'
 }
 else{
-table+='<td id='+i+j+'>'+'</td>'
+table+='<td id='+i+-+j+'>'+'</td>'
 }
 }
 table+='</tr>'
@@ -41,12 +42,13 @@ document.getElementById("t").innerHTML='<table  border=1>'+table+'</table>';
 
 document.onkeydown = function(e) {
 var marioParent = document.getElementById('mario').parentNode.id;
+var arrayParent=marioParent.spilt("-");
 //var mario=getElementById('mario');
     switch (e.keyCode) {
         case 37:
          
-		var arrayParent=marioParent.spilt("");
 		
+		 alert("hhhdwhd"+arrayParent);  
 		  break;
         case 38:
 		
