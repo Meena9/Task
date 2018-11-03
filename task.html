@@ -1,7 +1,7 @@
 <html>
 <head>
 <style>
-
+table{}
 tr,td{
 height:100;
 width:100;
@@ -14,47 +14,78 @@ var col=document.getElementById("col").value;
 var a=[];
 var b=[];
 for(var k=0;k<4;k++){
+
  a[k]=Math.floor((Math.random() * row)+1);
 b[k]=Math.floor((Math.random() * col)+1);
 }
 var table='';
+
 for(var i=1;i<=row;i++){
 table+='<tr>'
 for(var j=1;j<=col;j++){
 if(i==a[0]& j==b[0]){
-table+='<td>'+'<img src="1200x630bb_vokqee.jpg"' +'</td>'
+table+='<td id='+j+'>'+'<img src="1200x630bb_vokqee.jpg">' +'</td>'
 }
 else if((i==a[1]&j==b[1])|(i==a[2]&j==b[2])|(i==a[3]&j==b[3])){
-table+='<td>'+'<img src="mushroom-512_f9ma5t.png"' +'</td>'
+table+='<td id='+j+'>' +'<img src="mushroom-512_f9ma5t.png">' +'</td>'
 }
 else{
-table+='<td></td>'
+table+='<td id='+j+'>'+'</td>'
 }
 }
 table+='</tr>'
 }
  
 document.getElementById("t").innerHTML='<table  border=1>'+table+'</table>';
-
-document.onkeydown = function(e) {
-    switch (e.keyCode) {
-        case 37:
-            alert('left');
-            break;
-        case 38:
-            alert('up');
-            break;
-        case 39:
-            alert('right');
-            break;
-        case 40:
-            alert('down');
-            break;
-    }
-};
-
-
 }
+
+
+(function (window, document, drawModule, undefined) {
+
+var btn = document.getElementById('btn');
+btn.addEventListener("click", function(){ drawModule.init();});
+
+	document.onkeydown = function(event) {
+
+        keyCode = window.event.keyCode; 
+        keyCode = event.keyCode;
+
+        switch(keyCode) {
+        
+        case 37: 
+          if (direction != 'right') {
+            direction = 'left';
+          }
+          console.log('left'); 
+          break;
+
+        case 39:
+          if (direction != 'left') {
+          direction = 'right';
+          console.log('right');
+          }
+          break;
+
+        case 38:
+          if (direction != 'down') {
+          direction = 'up';
+          console.log('up');
+          }
+          break;
+
+        case 40:
+          if (direction != 'up') {
+          direction = 'down';
+          console.log('down');
+          }
+          break;
+          }
+      }
+
+
+})(window, document, drawModule);
+
+
 
 
 
@@ -65,13 +96,10 @@ document.onkeydown = function(e) {
 <center>
 Enter the no of rows :<input type="text" id="row"><br><br>
 Enter the no of cols :<input type="text" id="col"><br><br>
-<button onclick="gamegenrate()">
- Genrate game</button><br><br>
-<div id="t" >
+<button onclick="gamegenrate()"> Genrate game</button><br><br>
+<div id="t">
 
 </div>
-<br><br>
-
 </center>
 </body>
 </html>
