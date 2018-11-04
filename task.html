@@ -13,25 +13,32 @@ var row=document.getElementById("row").value;
 var col=document.getElementById("col").value;
 var a=[];
 var b=[];
-for(var k=0;k<=(row+col)/2;k++){
+ 
+ var mx= Math.floor((Math.random() * row)+1);
+var my= Math.floor((Math.random() * col)+1);
+ for(var k=0;k<(row+col)/2;k++){
  a[k]=Math.floor((Math.random() * row)+1);
 b[k]=Math.floor((Math.random() * col)+1);
 }
 var table='';
-var f=(row+col)/2;
+
 for(var i=1;i<=row;i++){
 table+='<tr>'
 for(var j=1;j<=col;j++){
 
-if(i==a[0]& j==b[0]){
+if(i==mx& j==my){
 table+='<td id='+i+-+j+'>'+'<img src="1200x630bb_vokqee.jpg" id=mario>' +'</td>'
 }
-else if((i==a[f]&j==b[f])){
-table+='<td id='+i+-+j+'>' +'<img src="mushroom-512_f9ma5t.png" id="food">' +'</td>'
-}
-else{
+else if(a.indexOf(i) != -1) {
+   var iPosition = a.indexOf(i);
+
+   if(b[iPosition] == j){
+       table+='<td id='+i+-+j+'>' +'<img src="mushroom-512_f9ma5t.png" id="food">' +'</td>'
+   }else{
 table+='<td id='+i+-+j+'>'+'</td>'
 }
+}
+
 }
 table+='</tr>'
 
@@ -53,7 +60,14 @@ var count=0;
 	                 document.getElementById(marioParent).removeChild(mario);
                       
                         newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+						  if(a.indexOf(arrayParent[1]) != -1) {
+   var iPosition = a.indexOf(arrayParent[1]);
+
+   if(b[iPosition] == arrayParent[0]){
+     document.getElementById(newmarioParent).firstChild.remove()
+   }
 						 
+             }     	 
                         document.getElementById(newmarioParent).appendChild(mario);
 
 
@@ -73,6 +87,13 @@ var count=0;
 	                 document.getElementById(marioParent).removeChild(mario);
                       
                         newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+	 if(a.indexOf(arrayParent[0]) != -1) {
+   var iPosition = a.indexOf(arrayParent[0]);
+
+   if(b[iPosition] == arrayParent[1]){
+     document.getElementById(newmarioParent).firstChild.remove()
+   }
+}
 						 
                         document.getElementById(newmarioParent).appendChild(mario);
 
@@ -88,8 +109,14 @@ var count=0;
 	                 document.getElementById(marioParent).removeChild(mario);
                       
                         newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+						 if(a.indexOf(arrayParent[1]) != -1) {
+   var iPosition = a.indexOf(arrayParent[1]);
+
+   if(b[iPosition] == arrayParent[0]){
+     document.getElementById(newmarioParent).firstChild.remove()
+   }
 						 
-                        document.getElementById(newmarioParent).appendChild(mario);
+             }           document.getElementById(newmarioParent).appendChild(mario);
 
 
 
@@ -102,7 +129,13 @@ var count=0;
 	                 document.getElementById(marioParent).removeChild(mario);
                       
                         newmarioParent = arrayParent[0] + "-" + arrayParent[1];
-						 
+						 if(a.indexOf(arrayParent[0]) != -1) {
+   var iPosition = a.indexOf(arrayParent[0]);
+
+   if(b[iPosition] == arrayParent[1]){
+     document.getElementById(newmarioParent).firstChild.remove()
+   }
+	}					 
                         document.getElementById(newmarioParent).appendChild(mario);
 
 
