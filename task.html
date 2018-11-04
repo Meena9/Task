@@ -1,4 +1,7 @@
-<html>
+ 
+	   
+	   
+	   <html>
 <head>
 <style>
 table{}
@@ -13,14 +16,11 @@ var row=document.getElementById("row").value;
 var col=document.getElementById("col").value;
 var a=[];
 var b=[];
-
 for(var k=0;k<4;k++){
-
  a[k]=Math.floor((Math.random() * row)+1);
 b[k]=Math.floor((Math.random() * col)+1);
 }
 var table='';
-
 for(var i=1;i<=row;i++){
 table+='<tr>'
 for(var j=1;j<=col;j++){
@@ -38,12 +38,9 @@ table+='</tr>'
 }
  
 document.getElementById("t").innerHTML='<table  border=1>'+table+'</table>';
-
-
 document.onkeydown = function(e) {
-var marioParent = document.getElementById('mario').parentNode.Id;
-var foodParent = document.getElementById('food').parentNode.Id;
-var food = document.getElementById('food');
+var marioParent = document.getElementById('mario').parentNode.id;
+
 var arrayParent=marioParent.split("-");
 var mario=document.getElementById('mario');
 var newmarioParent;
@@ -51,79 +48,72 @@ var count=0;
  console.log("mario"+marioParent);
     switch (e.keyCode) {
         case 37:
-		
-      arrayParent[1]--;
-	  if(arrayParent[1]>=1){
-	  document.getElementById(marioParent).removeChild(mario);
-	  count++;
-	   newmarioParent=arrayParent[0]+"-"+arrayParent[1];
-	   if(foodParent==newmarioParent){
-	   document.getElementById(foodParent ).removeChild(food);
+		  arrayParent[1]--;
+		  if(arrayParent[1]>=1){
+	                 document.getElementById(marioParent).removeChild(mario);
+                      
+                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+						 
+                        document.getElementById(newmarioParent).appendChild(mario);
+
+
+
 	   }
-	  document.getElementById(newmarioParent).appendChild(mario);
-	  count++;
-	  }
+	 
+                        
+
+
+        
 	    console.log("mario left"+newmarioParent);
 		 
 		  break;
         case 38:
 		arrayParent[0]--;
-		if(arrayParent[0]>=1){
-		document.getElementById(marioParent).removeChild(mario);
-                        
+		 if(arrayParent[0]>=1){
+	                 document.getElementById(marioParent).removeChild(mario);
+                      
                         newmarioParent = arrayParent[0] + "-" + arrayParent[1];
-						if(foodParent==newmarioParent){
-	   document.getElementById(foodParent ).removeChild(food);
-	   }
+						 
                         document.getElementById(newmarioParent).appendChild(mario);
-						count++;
-}
-        
 
+
+
+	   }
           console.log("mario up"+newmarioParent);
             break;
+			
         case 39:
 		arrayParent[1]++;
 		if(arrayParent[1]<=col){
-		document.getElementById(marioParent).removeChild(mario);
-		  
-	  
-	   newmarioParent=arrayParent[0]+"-"+arrayParent[1];
-	   if(foodParent==newmarioParent){
-	   document.getElementById(foodParent ).removeChild(food);
+	                 document.getElementById(marioParent).removeChild(mario);
+                      
+                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+						 
+                        document.getElementById(newmarioParent).appendChild(mario);
+
+
+
 	   }
-	  document.getElementById(newmarioParent).appendChild(mario);
-	   count++;
-	  }
-	 
 	   console.log("mario right"+newmarioParent);
             break;
         case 40:
 		 arrayParent[0]++;
-		if(arrayParent[0]<=row){
-		document.getElementById(marioParent).removeChild(mario);
-		
-	  
-	   newmarioParent=arrayParent[0]+"-"+arrayParent[1];
-	   if(foodParent==newmarioParent){
-	   document.getElementById(foodParent ).removeChild(food);
+		             if(arrayParent[0]<=row){
+	                 document.getElementById(marioParent).removeChild(mario);
+                      
+                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+						 
+                        document.getElementById(newmarioParent).appendChild(mario);
+
+
+
 	   }
-	    document.getElementById(newmarioParent).appendChild(mario);
-		count++;
-		}
-		
 	   console.log("mario down"+newmarioParent);
           break;
           }
       }
 	  
-	 document.getElementById("c").innerHTML=count; 
-}
-
-
-
-
-
+	}
 
 </script>
 </head>
@@ -131,11 +121,11 @@ var count=0;
 <center>
 Enter the no of rows :<input type="text" id="row"><br><br>
 Enter the no of cols :<input type="text" id="col"><br><br>
-<button onclick="gamegenrate()"> Genrate game</button><br><br>
+<button onclick="gamegenrate()">Genrate game</button><br><br>
 <div id="t">
 
 </div>
-<div id='c'></div>
+
 </center>
 </body>
 </html>
