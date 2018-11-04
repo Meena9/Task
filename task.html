@@ -44,39 +44,52 @@ document.onkeydown = function(e) {
 var marioParent = document.getElementById('mario').parentNode.id;
 var arrayParent=marioParent.split("-");
 var mario=document.getElementById('mario');
+var newmarioParent;
  console.log("mario"+marioParent);
     switch (e.keyCode) {
         case 37:
-		
+		document.getElementById('mario').removeChild('marioParent');
       arrayParent[1]--;
+	   newmarioParent=arrayParent[0]+"-"+arrayParent[1];
+	  document.getElementById('mario').appendChild('newmarioParent');
 	  
-	   marioParent=arrayParent[0]+"-"+arrayParent[1];
-	    console.log("mario left"+marioParent);
+	    console.log("mario left"+newmarioParent);
+		 
 		  break;
         case 38:
-		 arrayParent[0]--;
+		document.getElementById('mario').removeChild('marioParent');
+      arrayParent[0]--;
+	   newmarioParent =arrayParent[0]+"-"+arrayParent[1];
+	  document.getElementById('mario').appendChild('newmarioParent');
+		
 	  
-	   marioParent=arrayParent[0]+"-"+arrayParent[1];
+	  
 		
 		 
-          console.log("mario up"+marioParent);
+          console.log("mario up"+newmarioParent);
             break;
         case 39:
+		document.getElementById('mario').removeChild('marioParent');
 		  arrayParent[1]++;
 	  
-	   marioParent=arrayParent[0]+"-"+arrayParent[1];
-	   console.log("mario right"+marioParent);
+	   newmarioParent=arrayParent[0]+"-"+arrayParent[1];
+	   document.getElementById('mario').appendChild('newmarioParent');
+	  
+	   console.log("mario right"+newmarioParent);
             break;
         case 40:
+		document.getElementById('mario').removeChild('marioParent');
 		 arrayParent[0]++;
 	  
-	   marioParent=arrayParent[0]+"-"+arrayParent[1];
-	   console.log("mario down"+marioParent);
+	   newmarioParent=arrayParent[0]+"-"+arrayParent[1];
+	     document.getElementById('mario').appendChild('newmarioParent');
+	  
+	   console.log("mario down"+newmarioParent);
           break;
           }
       }
 }
-     
+
 
 
 
