@@ -44,33 +44,34 @@ document.onkeydown = function(e) {
 var marioParent = document.getElementById('mario').parentNode.id;
 var arrayParent=marioParent.split("-");
 var mario=document.getElementById('mario');
+ console.log("mario"+marioParent);
     switch (e.keyCode) {
         case 37:
 		
       arrayParent[1]--;
 	  
-	   marioParent=arrayParent[1]+"-"+arrayParent[0];
-	    console.log("mario"+marioParent);
+	   marioParent=arrayParent[0]+"-"+arrayParent[1];
+	    console.log("mario left"+marioParent);
 		  break;
         case 38:
 		 arrayParent[0]--;
 	  
-	   marioParent=arrayParent[1]+"-"+arrayParent[0];
+	   marioParent=arrayParent[0]+"-"+arrayParent[1];
 		
 		 
-          console.log("mario"+marioParent);
+          console.log("mario up"+marioParent);
             break;
         case 39:
 		  arrayParent[1]++;
 	  
-	   marioParent=arrayParent[1]+"-"+arrayParent[0];
-	   console.log("mario"+marioParent);
+	   marioParent=arrayParent[0]+"-"+arrayParent[1];
+	   console.log("mario right"+marioParent);
             break;
         case 40:
 		 arrayParent[0]++;
 	  
-	   marioParent=arrayParent[1]+"-"+arrayParent[0];
-	   console.log("mario"+marioParent);
+	   marioParent=arrayParent[0]+"-"+arrayParent[1];
+	   console.log("mario down"+marioParent);
           break;
           }
       }
