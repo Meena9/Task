@@ -43,26 +43,34 @@ document.getElementById("t").innerHTML='<table  border=1>'+table+'</table>';
 document.onkeydown = function(e) {
 var marioParent = document.getElementById('mario').parentNode.id;
 var arrayParent=marioParent.split("-");
-//var mario=getElementById('mario');
+var mario=document.getElementById('mario');
     switch (e.keyCode) {
         case 37:
-         
-		 console.log("row "+arrayParent[0]);  
-		 console.log("column "+arrayParent[1]);  
+		
+      arrayParent[1]--;
+	  
+	   marioParent=arrayParent[1]+"-"+arrayParent[0];
+	    console.log("mario"+marioParent);
 		  break;
         case 38:
+		 arrayParent[0]--;
+	  
+	   marioParent=arrayParent[1]+"-"+arrayParent[0];
 		
-		 console.log("row "+arrayParent[0]);  
-		 console.log("column "+arrayParent[1]);  
-          
+		 
+          console.log("mario"+marioParent);
             break;
         case 39:
-		 console.log("row "+arrayParent[0]);  
-		 console.log("column "+arrayParent[1]);  
+		  arrayParent[1]++;
+	  
+	   marioParent=arrayParent[1]+"-"+arrayParent[0];
+	   console.log("mario"+marioParent);
             break;
         case 40:
-		 console.log("row "+arrayParent[0]);  
-		 console.log("column "+arrayParent[1]);  
+		 arrayParent[0]++;
+	  
+	   marioParent=arrayParent[1]+"-"+arrayParent[0];
+	   console.log("mario"+marioParent);
           break;
           }
       }
