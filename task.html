@@ -89,9 +89,9 @@ var newmarioParent;
 
 console.log("mario left"+newmarioParent);
 
-return leftmove();
+return setTimeout(leftmove, 1000);
                }else{
-			   return rightmove();
+			   return setTimeout(rightmove, 1000);
 			   }
 }
 
@@ -122,7 +122,11 @@ var count=0;
 
 
 
-	   }
+	   
+	   return setTimeout(upmove, 1000);
+               }else{
+			   return setTimeout(downmove, 1000);
+			   }
           console.log("mario up"+newmarioParent);
 		  }
 		  
@@ -151,9 +155,14 @@ var count=0;
 
 
 
-	   }
+	  
+	   
+	   return setTimeout(rightmove, 1000);
+               }else{
+			   return setTimeout(leftmove, 1000);
+			   }
 	   console.log("mario right"+newmarioParent);
-	   count++;
+	   
 	   }
 	   
 	   
@@ -175,16 +184,20 @@ var count=0;
    if(b[iPosition] == arrayParent[1]){
      document.getElementById(newmarioParent).firstChild.remove()
    }
-	}					 
-                        document.getElementById(newmarioParent).appendChild(mario);
+					 
+            }            document.getElementById(newmarioParent).appendChild(mario);
 
 
 
-	   }
+	   
+	      return setTimeout(downmove, 1000);
+               }else{
+			   return setTimeout(upmove, 1000);
+			   }
 	   console.log("mario down"+newmarioParent);
-	   count++;
+	   
 	   }
-	document.write("score"+ count)  
+	
 	}
 
 </script>
