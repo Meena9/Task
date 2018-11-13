@@ -1,0 +1,11 @@
+<script>
+var dataset = [2,2,4,2,6,4,7,8];
+var results = [];
+for ( i=0; i < dataset.length; i++ ){
+    if ( dataset[i] == 4){
+        results.push( i );
+    }
+}
+
+console.log(results);
+</script>
