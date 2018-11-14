@@ -1,11 +1,151 @@
-<script>
-var dataset = [2,2,4,2,6,4,7,8];
-var results = [];
-for ( i=0; i < dataset.length; i++ ){
-    if ( dataset[i] == 4){
-        results.push( i );
-    }
-}
+<html>
+<center>
+    Enter the no of rows :<input type="text" id="row"><br><br>
 
-console.log(results);
+
+    <button onclick="gamegenrate()">Genrate game</button><br><br>
+    <div id="t">
+
+    </div>
+    <br><br>
+    Enter the no row where u want to move :<input type="text" id="userrow"><br><br>
+
+    <input type='button' value="submit" onclick="mapping()">
+
+</center>
+
+<style>
+    tr,
+    td {
+        height: 100;
+        width: 100;
+    }
+</style>
+
+<script>
+    var a = [];
+    var b = [];
+    var row ;
+    function gamegenrate() {
+         row = document.getElementById("row").value;
+        var l = 0;
+
+        while (l < row) {
+            var randomrow = Math.floor(Math.random() * row);
+            var randowcol = Math.floor(Math.random() * row);
+            var temp = 0;
+            if (a.length == 0 && b.length == 0) {
+                a[l] = randomrow;
+                b[l] = randowcol;
+                l++;
+            }
+            else {
+                for (var j = 0; j < l; j++) {
+                    if (a[l] == randomrow && b[l] == randowcol) {
+                        break;
+                    } else {
+                        temp++;
+                    }
+
+                }
+                if (temp == l) {
+                    a[l] = randomrow;
+                    b[l] = randowcol;
+                    l++;
+                }
+            }
+
+        }
+
+console.log("a value " + a + '<br>');
+        console.log("b value " + b);
+
+ var table='';
+
+ for(var i=0;i<row;i++){
+     table="<tr>";
+     var results = [];
+
+        for (var k = 0; k < a.length; k++) {
+
+            if (a[k] == i) {
+                results.push(i);
+            }
+        }
+        console.log(results);
+     for(var j=0;j<row;j++){
+table="<td></td>"
+
+console.log
+
+     }
+table="</tr>";
+
+ }
+        
+    }
+
+
+    function mapping() {
+       
+        
+
+       
+        var m = document.getElementById('userrow').value;
+        console.log(m);
+       console.log(row);
+        
+      for(var j=0;j<results.length;j++){
+        console.log(b[results[j]]);
+      }
+            
+        
+
+    }
+
+
+
+
+
+
+
+
+
+
+// function mapping(){
+
+
+
+// var m=document.getElementById('userrow').value;
+// var n=document.getElementById('usercol').value;
+
+// var results = [];
+// for (var i=0; i < a.length; i++ ){
+//     if ( a[i] == m){
+//         results.push( i );
+//     }
+// }
+// var count =0;
+// for(var j=0;j<results.length;j++){
+// if(b[results[j]]==n){
+
+//    count++;
+//     break;
+// }
+
+
+// }
+// if(count>0){
+//     console.log("avilable");
+// }
+// else{
+
+//     console.log("not avilable");
+// }
+
+// }
+
+
 </script>
+
+</html>
