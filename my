@@ -1,16 +1,16 @@
 <html>
+
+<html>
 <center>
     Enter the no of rows :<input type="text" id="row"><br><br>
-
+    Enter the no of cols :<input type='number' id='col'><br><br>
 
     <button onclick="gamegenrate()">Genrate game</button><br><br>
     <div id="t">
 
     </div>
     <br><br>
-    Enter the no row where u want to move :<input type="text" id="userrow"><br><br>
-
-    <input type='button' value="submit" onclick="mapping()">
+   
 
 </center>
 
@@ -23,14 +23,25 @@
 </style>
 
 <script>
-    var a = [];
-    var b = [];
-    var row ;
+    
     function gamegenrate() {
-         row = document.getElementById("row").value;
-        var l = 0;
+	var a = [];
+    var b = [];
+    
+        var row = document.getElementById("row").value;
+		 var col = document.getElementById("col").value;
+		 
+		
+		 
+		 var hRC=(+row+ +col)/2;
+		  var n = hRC.toFixed();
+		  
+		 console.log(hRC);
+		 console.log(n);
+       
+	   var l = 0;
 
-        while (l < row) {
+        while (l < n) {
             var randomrow = Math.floor(Math.random() * row);
             var randowcol = Math.floor(Math.random() * row);
             var temp = 0;
@@ -56,96 +67,247 @@
             }
 
         }
-
-console.log("a value " + a + '<br>');
+		console.log("a value " + a + '<br>');
         console.log("b value " + b);
+		var mx;
+		var my;
+		var o=0;
+		while(o<1){
+		 var mxr = Math.floor(Math.random() * row);
+		 var myr= Math.floor(Math.random() * col);
+		 var count=0;
+		 for(var i=0;i<n;i++){
+		 if(mxr==a[i]&& myr==b[i]){
+		 break;
+		 }
+		 else{
+		 
+		 count++;
+		 }
+		 }
+		 if(count==n){
+		 mx=mxr;
+		 my=myr;
+		 o++;
+		 }
+}
 
- var table='';
+console.log("mx value"+mx);
+console.log("my value"+my)
 
- for(var i=0;i<row;i++){
-     table="<tr>";
-     var results = [];
+var k = 0;
+            var table = '';
+            var result = [];
+            var result_value = [];
 
-        for (var k = 0; k < a.length; k++) {
 
-            if (a[k] == i) {
-                results.push(i);
+
+            for (var i = 0; i < row; i++) {
+                table += '<tr>'
+                        var result=[];
+                for (var j = 0; j < a.length; j++) {
+                    
+                    if (a[j] == i) {
+                        result.push(j);
+                        //result_value.push(b[j]);
+                    
+                    }
+                }
+                console.log(result);
+                var clarrB=[];
+                for(var m=0;m<result.length;m++){
+                       
+                       clarrB.push(b[result[m]]);
+                   
+                   }
+
+                for (var k = 0; k < row; k++) {
+                    if(mx==i && my==k){
+					 table += '<td id=' + i + -+k + '><img src="1200x630bb_vokqee.jpg" id=mario></td>'}
+					
+                     else  if(clarrB.indexOf(k)!=-1){
+
+                           table += '<td id=' + i + -+k + '><img src="mushroom-512_f9ma5t.png" id="food"></td>'
+                       }
+                    else
+                    {
+                        table += '<td id=' + i + -+k + '></td>'
+                    }
+
+
+                }
+
+                table += '</tr>'
             }
-        }
-        console.log(results);
-     for(var j=0;j<row;j++){
-table="<td></td>"
 
-console.log
-
-     }
-table="</tr>";
-
- }
-        
-    }
-
-
-    function mapping() {
-       
-        
-
-       
-        var m = document.getElementById('userrow').value;
-        console.log(m);
-       console.log(row);
-        
-      for(var j=0;j<results.length;j++){
-        console.log(b[results[j]]);
+            document.getElementById("t").innerHTML = '<table border=1>' + table + '</table>';
+			
+			
+			document.onkeydown = function(e) {
+    switch (e.keyCode) {
+        case 37:
+		 
+        leftmove()
+		  break;
+        case 38:
+		 upmove();
+		
+            break;
+			
+        case 39:
+		
+         rightmove();
+            break;
+        case 40:
+	        downmove();
+		
+          break;
+          }
       }
+	  function leftmove() {
+        var marioParent = document.getElementById('mario').parentNode.id;
+
+        var arrayParent = marioParent.split("-");
+        var mario = document.getElementById('mario');
+        var newmarioParent;
+
+
+        if (arrayParent[1] > 0) {
+          arrayParent[1]--;
+          document.getElementById(marioParent).removeChild(mario);
+          newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+          if (b.indexOf(arrayParent[1]) != -1) {
+            var iPosition = b.indexOf(arrayParent[1]);
+            if (a[iPosition] == arrayParent[0]) {
+              document.getElementById(newmarioParent).firstChild.remove()
+            } 
             
-        
+             document.getElementById(newmarioParent).appendChild(mario);
+          }
+          
+         
+          setTimeout(function(){ leftmove(); }, 1000);
+        } else {
+          rightmove();
+        }
+      }
+	
+function upmove(){
 
-    }
+var marioParent = document.getElementById('mario').parentNode.id;
+
+var arrayParent=marioParent.split("-");
+var mario=document.getElementById('mario');
+var newmarioParent;
+
+		
+		 if(arrayParent[0]>1){
+		 arrayParent[0]--;
+	                 document.getElementById(marioParent).removeChild(mario);
+                      
+                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+	 if(a.indexOf(arrayParent[0]) != -1) {
+   var iPosition = a.indexOf(arrayParent[0]);
+
+   if(b[iPosition] == arrayParent[1]){
+     document.getElementById(newmarioParent).firstChild.remove()
+   }
+}
+						 
+                        document.getElementById(newmarioParent).appendChild(mario);
 
 
 
+	   
+	   return setTimeout(function(){ upmove(); }, 1000);
+               }else{
+			   return setTimeout(function(){ downmove(); }, 1000);
+			   }
+          console.log("mario up"+newmarioParent);
+		  }
+		  
+		  
+		  
+		  function  rightmove(){
+var marioParent = document.getElementById('mario').parentNode.id;
+
+var arrayParent=marioParent.split("-");
+var mario=document.getElementById('mario');
+var newmarioParent;
+
+		
+		if(arrayParent[1]<col){
+		arrayParent[1]++;
+	                 document.getElementById(marioParent).removeChild(mario);
+                      
+                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+						 if(b.indexOf(arrayParent[1]) != -1) {
+   var iPosition = b.indexOf(arrayParent[1]);
+
+   if(a[iPosition] == arrayParent[0]){
+     document.getElementById(newmarioParent).firstChild.remove();
+   }
+			 document.getElementById(newmarioParent).appendChild(mario);			 
+             }          
 
 
 
+	  
+	   
+	   return setTimeout(function(){ rightmove(); }, 1000);
+               }else{
+			   return setTimeout(function(){ leftmove(); }, 1000);
+			   }
+	   console.log("mario right"+newmarioParent);
+	   
+	   }
+	   
+	   
+	   function downmove(){
+	   var marioParent = document.getElementById('mario').parentNode.id;
+
+var arrayParent=marioParent.split("-");
+var mario=document.getElementById('mario');
+var newmarioParent;
+
+		 
+		             if(arrayParent[0]<row){
+					 arrayParent[0]++;
+	                 document.getElementById(marioParent).removeChild(mario);
+                      
+                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+						 if(a.indexOf(arrayParent[0]) != -1) {
+   var iPosition = a.indexOf(arrayParent[0]);
+
+   if(b[iPosition] == arrayParent[1]){
+     document.getElementById(newmarioParent).firstChild.remove();
+   }
+					 
+            }            document.getElementById(newmarioParent).appendChild(mario);
 
 
 
-
-// function mapping(){
-
-
-
-// var m=document.getElementById('userrow').value;
-// var n=document.getElementById('usercol').value;
-
-// var results = [];
-// for (var i=0; i < a.length; i++ ){
-//     if ( a[i] == m){
-//         results.push( i );
-//     }
-// }
-// var count =0;
-// for(var j=0;j<results.length;j++){
-// if(b[results[j]]==n){
-
-//    count++;
-//     break;
-// }
+	   
+	      return setTimeout(function(){ downmove(); }, 1000);
+               }else{
+			   return setTimeout(function(){ upmove(); }, 1000);
+			   }
+	   console.log("mario down"+newmarioParent);
+	   
+	   }
+	
+        }
+         
 
 
-// }
-// if(count>0){
-//     console.log("avilable");
-// }
-// else{
+    
 
-//     console.log("not avilable");
-// }
-
-// }
 
 
 </script>
 
+</html>
+
+
+</script>
 </html>
