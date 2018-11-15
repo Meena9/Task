@@ -40,34 +40,35 @@
 		 console.log(n);
        
 	   var l = 0;
+       while (l < n) {
+       var randomrow = Math.floor((Math.random() * row) + 0);
+                var randowcol = Math.floor((Math.random() * col) + 0);
+                var temp = 0;
 
-        while (l < n) {
-            var randomrow = Math.floor(Math.random() * row);
-            var randowcol = Math.floor(Math.random() * row);
-            var temp = 0;
-            if (a.length == 0 && b.length == 0) {
-                a[l] = randomrow;
+                if (a.length == 0 && b.length == 0) {
+                    a[l] = randomrow;
                 b[l] = randowcol;
                 l++;
-            }
-            else {
-                for (var j = 0; j < l; j++) {
-                    if (a[l] == randomrow && b[l] == randowcol) {
-                        break;
-                    } else {
-                        temp++;
-                    }
-
                 }
-                if (temp == l) {
-                    a[l] = randomrow;
+                else {
+                    for (k = 0; k < l; k++) {
+                        if (a[k] == randomrow  && b[k] == randowcol) {
+                            break;
+                        }
+                        else {
+                            temp++;
+                        }
+                    }
+                    if (temp == l) {
+                        a[l] = randomrow;
                     b[l] = randowcol;
                     l++;
+                    }
                 }
-            }
 
-        }
-		console.log("a value " + a + '<br>');
+         }
+        
+		console.log("a value " + a );
         console.log("b value " + b);
 		var mx;
 		var my;
@@ -121,17 +122,19 @@ var k = 0;
                    
                    }
 
-                for (var k = 0; k < row; k++) {
+                for (var k = 0; k < col; k++) {
                     if(mx==i && my==k){
-					 table += '<td id=' + i + -+k + '><img src="1200x630bb_vokqee.jpg" id=mario></td>'}
+
+					 table+='<td id='+i+'-'+k+'>'+'<img src="1200x630bb_vokqee.jpg" id=mario>' +'</td>'
+                     }
 					
                      else  if(clarrB.indexOf(k)!=-1){
 
-                           table += '<td id=' + i + -+k + '><img src="mushroom-512_f9ma5t.png" id="food"></td>'
+                          table+='<td id='+i+'-'+k+'>' +'<img src="mushroom-512_f9ma5t.png" id="food">' +'</td>'
                        }
                     else
                     {
-                        table += '<td id=' + i + -+k + '></td>'
+                        table += '<td id='+i+'-'+k+'>'+'</td>';
                     }
 
 
@@ -147,7 +150,11 @@ var k = 0;
     switch (e.keyCode) {
         case 37:
 		 
-        leftmove()
+        leftmove();
+        if(a.length==0){
+
+            break;
+        }
 		  break;
         case 38:
 		 upmove();
@@ -163,11 +170,12 @@ var k = 0;
 		
           break;
           }
-      }
+      
 	  function leftmove() {
         var marioParent = document.getElementById('mario').parentNode.id;
 
         var arrayParent = marioParent.split("-");
+        console.log(arrayParent[0]+" "+arrayParent[1]);
         var mario = document.getElementById('mario');
         var newmarioParent;
 
@@ -176,138 +184,291 @@ var k = 0;
           arrayParent[1]--;
           document.getElementById(marioParent).removeChild(mario);
           newmarioParent = arrayParent[0] + "-" + arrayParent[1];
-          if (b.indexOf(arrayParent[1]) != -1) {
-            var iPosition = b.indexOf(arrayParent[1]);
-            if (a[iPosition] == arrayParent[0]) {
-              document.getElementById(newmarioParent).firstChild.remove()
-            } 
-            
+          var newmarioParentsp=newmarioParent.split("-");
+          console.log(newmarioParent[1]);
+          console.log(a);
+          console.log(b);
+          
+          
+
+          var results = [];
+for (var i=0; i < a.length; i++ ){
+    if ( a[i] == newmarioParentsp[0] ){
+        results.push( i );
+    }
+}
+var count =0;
+
+console.log("value of a  "+a);
+          console.log("value  of b"+b);
+for(var j=0;j<results.length;j++){
+if(b[results[j]]==newmarioParentsp[1]){
+   
+   count++;
+   a.splice(results[j],1);
+   b.splice(results[j],1);
+    break;
+}
+
+
+}
+
+
+console.log("value of a  "+a);
+          console.log("value  of b"+b);
+// if ( count> -1) {
+//   array.splice(index, 2);
+// }
+if(count>0){
+    document.getElementById(newmarioParent).firstChild.remove();
+    
+ 
+    console.log("avilable");
+}
+console.log("value of a  "+a);
+          console.log("value  of b"+b);
+
+             
+             
              document.getElementById(newmarioParent).appendChild(mario);
-          }
+          
           
          
           setTimeout(function(){ leftmove(); }, 1000);
-        } else {
+        } 
+         else {
           rightmove();
         }
       }
-	
+      
+      
 function upmove(){
-
 var marioParent = document.getElementById('mario').parentNode.id;
 
-var arrayParent=marioParent.split("-");
-var mario=document.getElementById('mario');
+var arrayParent = marioParent.split("-");
+console.log(arrayParent[0]+" "+arrayParent[1]);
+var mario = document.getElementById('mario');
 var newmarioParent;
 
-		
-		 if(arrayParent[0]>1){
-		 arrayParent[0]--;
-	                 document.getElementById(marioParent).removeChild(mario);
-                      
-                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
-	 if(a.indexOf(arrayParent[0]) != -1) {
-   var iPosition = a.indexOf(arrayParent[0]);
 
-   if(b[iPosition] == arrayParent[1]){
-     document.getElementById(newmarioParent).firstChild.remove()
-   }
+if (arrayParent[0] > 0) {
+  arrayParent[0]--;
+  document.getElementById(marioParent).removeChild(mario);
+  newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+  var newmarioParentsp=newmarioParent.split("-");
+  console.log(newmarioParent[1]);
+  console.log(a);
+  console.log(b);
+  
+  
+
+  var results = [];
+for (var i=0; i < a.length; i++ ){
+if ( a[i] == newmarioParentsp[0] ){
+results.push( i );
 }
-						 
-                        document.getElementById(newmarioParent).appendChild(mario);
+}
+var count =0;
+
+console.log("value of a  "+a);
+  console.log("value  of b"+b);
+for(var j=0;j<results.length;j++){
+if(b[results[j]]==newmarioParentsp[1]){
+
+count++;
+a.splice(results[j],1);
+b.splice(results[j],1);
+break;
+}
 
 
+}
 
-	   
-	   return setTimeout(function(){ upmove(); }, 1000);
-               }else{
-			   return setTimeout(function(){ downmove(); }, 1000);
-			   }
-          console.log("mario up"+newmarioParent);
+
+console.log("value of a  "+a);
+  console.log("value  of b"+b);
+// if ( count> -1) {
+//   array.splice(index, 2);
+// }
+if(count>0){
+document.getElementById(newmarioParent).firstChild.remove();
+
+
+console.log("avilable");
+}
+console.log("value of a  "+a);
+  console.log("value  of b"+b);
+
+     
+     
+     document.getElementById(newmarioParent).appendChild(mario);
+  
+  
+ 
+  setTimeout(function(){ upmove(); }, 1000);
+} 
+ else {
+  downmove();
+}
+
 		  }
 		  
 		  
 		  
 		  function  rightmove(){
-var marioParent = document.getElementById('mario').parentNode.id;
+            var marioParent = document.getElementById('mario').parentNode.id;
 
-var arrayParent=marioParent.split("-");
-var mario=document.getElementById('mario');
-var newmarioParent;
-
-		
-		if(arrayParent[1]<col){
-		arrayParent[1]++;
-	                 document.getElementById(marioParent).removeChild(mario);
-                      
-                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
-						 if(b.indexOf(arrayParent[1]) != -1) {
-   var iPosition = b.indexOf(arrayParent[1]);
-
-   if(a[iPosition] == arrayParent[0]){
-     document.getElementById(newmarioParent).firstChild.remove();
-   }
-			 document.getElementById(newmarioParent).appendChild(mario);			 
-             }          
+        var arrayParent = marioParent.split("-");
+        console.log(arrayParent[0]+" "+arrayParent[1]);
+        var mario = document.getElementById('mario');
+        var newmarioParent;
 
 
+        if (arrayParent[1] < (col-1)) {
+          arrayParent[1]++;
+          document.getElementById(marioParent).removeChild(mario);
+          newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+          var newmarioParentsp=newmarioParent.split("-");
+          console.log(newmarioParent[1]);
+          console.log(a);
+          console.log(b);
+          
+          
 
-	  
+          var results = [];
+for (var i=0; i < a.length; i++ ){
+    if ( a[i] == newmarioParentsp[0] ){
+        results.push( i );
+    }
+}
+var count =0;
+
+console.log("value of a  "+a);
+          console.log("value  of b"+b);
+for(var j=0;j<results.length;j++){
+if(b[results[j]]==newmarioParentsp[1]){
+   
+   count++;
+   a.splice(results[j],1);
+   b.splice(results[j],1);
+    break;
+}
+
+
+}
+
+
+console.log("value of a  "+a);
+          console.log("value  of b"+b);
+// if ( count> -1) {
+//   array.splice(index, 2);
+// }
+if(count>0){
+    document.getElementById(newmarioParent).firstChild.remove();
+    
+ 
+    console.log("avilable");
+}
+console.log("value of a  "+a);
+          console.log("value  of b"+b);
+
+             
+             
+             document.getElementById(newmarioParent).appendChild(mario);
+          
+          
+         
+          setTimeout(function(){ rightmove(); }, 1000);
+        } 
+         else {
+          leftmove();
+        }
+}
+
 	   
-	   return setTimeout(function(){ rightmove(); }, 1000);
-               }else{
-			   return setTimeout(function(){ leftmove(); }, 1000);
-			   }
-	   console.log("mario right"+newmarioParent);
-	   
-	   }
 	   
 	   
 	   function downmove(){
-	   var marioParent = document.getElementById('mario').parentNode.id;
+        var marioParent = document.getElementById('mario').parentNode.id;
 
-var arrayParent=marioParent.split("-");
-var mario=document.getElementById('mario');
+var arrayParent = marioParent.split("-");
+console.log(arrayParent[0]+" "+arrayParent[1]);
+var mario = document.getElementById('mario');
 var newmarioParent;
 
-		 
-		             if(arrayParent[0]<row){
-					 arrayParent[0]++;
-	                 document.getElementById(marioParent).removeChild(mario);
-                      
-                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
-						 if(a.indexOf(arrayParent[0]) != -1) {
-   var iPosition = a.indexOf(arrayParent[0]);
 
-   if(b[iPosition] == arrayParent[1]){
-     document.getElementById(newmarioParent).firstChild.remove();
-   }
-					 
-            }            document.getElementById(newmarioParent).appendChild(mario);
+if (arrayParent[0] < (row-1)) {
+  arrayParent[0]++;
+  document.getElementById(marioParent).removeChild(mario);
+  newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+  var newmarioParentsp=newmarioParent.split("-");
+  console.log(newmarioParent[1]);
+  console.log(a);
+  console.log(b);
+  
+  
+
+  var results = [];
+for (var i=0; i < a.length; i++ ){
+if ( a[i] == newmarioParentsp[0] ){
+results.push( i );
+}
+}
+var count =0;
+
+console.log("value of a  "+a);
+  console.log("value  of b"+b);
+for(var j=0;j<results.length;j++){
+if(b[results[j]]==newmarioParentsp[1]){
+
+count++;
+a.splice(results[j],1);
+b.splice(results[j],1);
+break;
+}
 
 
+}
 
-	   
-	      return setTimeout(function(){ downmove(); }, 1000);
-               }else{
-			   return setTimeout(function(){ upmove(); }, 1000);
-			   }
-	   console.log("mario down"+newmarioParent);
-	   
-	   }
+
+console.log("value of a  "+a);
+  console.log("value  of b"+b);
+// if ( count> -1) {
+//   array.splice(index, 2);
+// }
+if(count>0){
+document.getElementById(newmarioParent).firstChild.remove();
+
+
+console.log("avilable");
+}
+console.log("value of a  "+a);
+  console.log("value  of b"+b);
+
+     
+     
+     document.getElementById(newmarioParent).appendChild(mario);
+  
+  
+ 
+  setTimeout(function(){ downmove(); }, 1000);
+} 
+ else {
+  upmove();
+}
 	
         }
          
 
-
+    }
     
 
-
+    }  
 
 </script>
 
 </html>
 
 
-</script>
+
 </html>
