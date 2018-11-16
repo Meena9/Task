@@ -1,216 +1,514 @@
 <html>
-<head>
+
+<html>
+<center>
+    Enter the no of rows :<input type="text" id="row"><br><br>
+    Enter the no of cols :<input type='number' id='col'><br><br>
+
+    <button onclick="gamegenrate()">Genrate game</button><br><br>
+    <div id="t">
+
+    </div>
+    <br><br>
+   
+
+</center>
+
 <style>
-table{}
-tr,td{
-height:100;
-width:100;
-}
+    tr,
+    td {
+        height: 100;
+        width: 100;
+    }
 </style>
+
 <script>
-function gamegenrate(){
-var row=document.getElementById("row").value;
-var col=document.getElementById("col").value;
-var a=[];
-var b=[];
- 
- var mx= Math.floor((Math.random() * row)+1);
-var my= Math.floor((Math.random() * col)+1);
- for(var k=0;k<(row+col)/2;k++){
- a[k]=Math.floor((Math.random() * row)+1);
-b[k]=Math.floor((Math.random() * col)+1);
-}
-var table='';
+    
+    function gamegenrate() {
+	var a = [];
+    var b = [];
+    var stepcount=0;
+    var cl=0;
+        var row = document.getElementById("row").value;
+		 var col = document.getElementById("col").value;
+		 
+		
+		 
+		 var hRC=(+row+ +col)/2;
+		  var n = hRC.toFixed();
+		  
+		 console.log(hRC);
+		 console.log(n);
+       
+	   var l = 0;
+       while (l < n) {
+       var randomrow = Math.floor((Math.random() * row) + 0);
+                var randowcol = Math.floor((Math.random() * col) + 0);
+                var temp = 0;
 
-for(var i=1;i<=row;i++){
-table+='<tr>'
-for(var j=1;j<=col;j++){
+                if (a.length == 0 && b.length == 0) {
+                    a[l] = randomrow;
+                b[l] = randowcol;
+                l++;
+                }
+                else {
+                    for (k = 0; k < l; k++) {
+                        if (a[k] == randomrow  && b[k] == randowcol) {
+                            break;
+                        }
+                        else {
+                            temp++;
+                        }
+                    }
+                    if (temp == l) {
+                        a[l] = randomrow;
+                    b[l] = randowcol;
+                    l++;
+                    }
+                }
 
-if(i==mx& j==my){
-table+='<td id='+i+-+j+'>'+'<img src="1200x630bb_vokqee.jpg" id=mario>' +'</td>'
+         }
+        
+		console.log("a value " + a );
+        console.log("b value " + b);
+		var mx;
+		var my;
+		var o=0;
+		while(o<1){
+		 var mxr = Math.floor(Math.random() * row);
+		 var myr= Math.floor(Math.random() * col);
+		 var count=0;
+		 for(var i=0;i<n;i++){
+		 if(mxr==a[i]&& myr==b[i]){
+		 break;
+		 }
+		 else{
+		 
+		 count++;
+		 }
+		 }
+		 if(count==n){
+		 mx=mxr;
+		 my=myr;
+		 o++;
+		 }
 }
-else if(a.indexOf(i) != -1) {
-   var iPosition = a.indexOf(i);
 
-   if(b[iPosition] == j){
-       table+='<td id='+i+-+j+'>' +'<img src="mushroom-512_f9ma5t.png" id="food">' +'</td>'
-   }else{
-table+='<td id='+i+-+j+'>'+'</td>'
-}
-}
+console.log("mx value"+mx);
+console.log("my value"+my)
 
-}
-table+='</tr>'
+var k = 0;
+            var table = '';
+            var result = [];
+            var result_value = [];
 
-}
- 
-document.getElementById("t").innerHTML='<table  border=1>'+table+'</table>';
-document.onkeydown = function(e) {
-    switch (e.keyCode) {
+
+
+            for (var i = 0; i < row; i++) {
+                table += '<tr>'
+                        var result=[];
+                for (var j = 0; j < a.length; j++) {
+                    
+                    if (a[j] == i) {
+                        result.push(j);
+                        //result_value.push(b[j]);
+                    
+                    }
+                }
+                console.log(result);
+                var clarrB=[];
+                for(var m=0;m<result.length;m++){
+                       
+                       clarrB.push(b[result[m]]);
+                   
+                   }
+
+                for (var k = 0; k < col; k++) {
+                    if(mx==i && my==k){
+
+					 table+='<td id='+i+'-'+k+'>'+'<img src="1200x630bb_vokqee.jpg" id=mario>' +'</td>'
+                     }
+					
+                     else  if(clarrB.indexOf(k)!=-1){
+
+                          table+='<td id='+i+'-'+k+'>' +'<img src="mushroom-512_f9ma5t.png" id="food">' +'</td>'
+                       }
+                    else
+                    {
+                        table += '<td id='+i+'-'+k+'>'+'</td>';
+                    }
+
+
+                }
+
+                table += '</tr>'
+            }
+
+            document.getElementById("t").innerHTML = '<table border=1>' + table + '</table>';
+			
+			
+			document.onkeydown = function(e) {
+               
+            switch (e.keyCode) {
         case 37:
-		  leftmove();
+        clearInterval(cl);
+        leftmove();
+        
+       
 		  break;
         case 38:
+        clearInterval(cl);
 		 upmove();
-		
+        
             break;
 			
-        case 39:
-		
-         rightmove();
+        case 39: 
+        clearInterval(cl);
+       rightmove();
             break;
         case 40:
+        clearInterval(cl);
 	        downmove();
 		
           break;
           }
+            
+	  function leftmove() {
+        var marioParent = document.getElementById('mario').parentNode.id;
+
+        var arrayParent = marioParent.split("-");
+        console.log(arrayParent[0]+" "+arrayParent[1]);
+        var mario = document.getElementById('mario');
+        var newmarioParent;
+
+
+        if (arrayParent[1] > 0) {
+          arrayParent[1]--;
+           
+          document.getElementById(marioParent).removeChild(mario);
+          newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+          var newmarioParentsp=newmarioParent.split("-");
+          console.log(newmarioParent[1]);
+          console.log(a);
+          console.log(b);
+          
+          
+
+          var results = [];
+for (var i=0; i < a.length; i++ ){
+    if ( a[i] == newmarioParentsp[0] ){
+        results.push( i );
+    }
+}
+var count =0;
+
+console.log("value of a  "+a);
+          console.log("value  of b"+b);
+for(var j=0;j<results.length;j++){
+if(b[results[j]]==newmarioParentsp[1]){
+   
+   count++;
+   a.splice(results[j],1);
+   b.splice(results[j],1);
+    break;
+}
+
+
+}
+
+
+console.log("value of a  "+a);
+          console.log("value  of b"+b);
+// if ( count> -1) {
+//   array.splice(index, 2);
+// }
+if(count>0){
+    document.getElementById(newmarioParent).firstChild.remove();
+    
+ 
+    console.log("avilable");
+}
+console.log("value of a  "+a);
+          console.log("value  of b"+b);
+
+              
+             
+             document.getElementById(newmarioParent).appendChild(mario);
+          
+             stepcount++;
+           console.log("step count  :"+ stepcount);
+           if(a.length==0 && b.length==0){
+            document.write("<center><b>congratulations you win the game !!<b><br> your score is"+ stepcount+"</center");
+               
+                e.preventDefault();
+                return false; 
+  
+}
+         
+  cl= setTimeout(function(){ leftmove(); }, 1000);
+ 
+        } 
+         else {
+          rightmove();
+        }
       }
-	  
-	  
-	 function leftmove(){
-var marioParent = document.getElementById('mario').parentNode.id;
-
-var arrayParent=marioParent.split("-");
-var mario=document.getElementById('mario');
-var newmarioParent;
- 
- 
-		  arrayParent[1]--;
-		  if(arrayParent[1]>=1){
-	                 document.getElementById(marioParent).removeChild(mario);
-                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
-						  if(a.indexOf(arrayParent[1]) != -1) {
-                        var iPosition = a.indexOf(arrayParent[1]);
-                      if(b[iPosition] == arrayParent[0]){
-                               document.getElementById(newmarioParent).firstChild.remove()
-                                    }
-                                 }     	 
-                        document.getElementById(newmarioParent).appendChild(mario);
-
-console.log("mario left"+newmarioParent);
-
-return setTimeout(leftmove, 1000);
-               }else{
-			   return setTimeout(rightmove, 1000);
-			   }
-}
-
-
+      
+      
 function upmove(){
-
 var marioParent = document.getElementById('mario').parentNode.id;
 
-var arrayParent=marioParent.split("-");
-var mario=document.getElementById('mario');
+var arrayParent = marioParent.split("-");
+console.log(arrayParent[0]+" "+arrayParent[1]);
+var mario = document.getElementById('mario');
 var newmarioParent;
-var count=0;
-		count++
-		arrayParent[0]--;
-		 if(arrayParent[0]>=1){
-	                 document.getElementById(marioParent).removeChild(mario);
-                      
-                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
-	 if(a.indexOf(arrayParent[0]) != -1) {
-   var iPosition = a.indexOf(arrayParent[0]);
 
-   if(b[iPosition] == arrayParent[1]){
-     document.getElementById(newmarioParent).firstChild.remove()
-   }
+
+if (arrayParent[0] > 0) {
+  arrayParent[0]--;
+  document.getElementById(marioParent).removeChild(mario);
+  newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+  var newmarioParentsp=newmarioParent.split("-");
+  console.log(newmarioParent[1]);
+  console.log(a);
+  console.log(b);
+  
+  
+
+  var results = [];
+for (var i=0; i < a.length; i++ ){
+if ( a[i] == newmarioParentsp[0] ){
+results.push( i );
 }
-						 
-                        document.getElementById(newmarioParent).appendChild(mario);
+}
+var count =0;
+
+console.log("value of a  "+a);
+  console.log("value  of b"+b);
+for(var j=0;j<results.length;j++){
+if(b[results[j]]==newmarioParentsp[1]){
+
+count++;
+a.splice(results[j],1);
+b.splice(results[j],1);
+break;
+}
 
 
+}
 
-	   
-	   return setTimeout(upmove, 1000);
-               }else{
-			   return setTimeout(downmove, 1000);
-			   }
-          console.log("mario up"+newmarioParent);
+
+console.log("value of a  "+a);
+  console.log("value  of b"+b);
+// if ( count> -1) {
+//   array.splice(index, 2);
+// }
+if(count>0){
+document.getElementById(newmarioParent).firstChild.remove();
+
+
+console.log("avilable");
+}
+console.log("value of a  "+a);
+  console.log("value  of b"+b);
+
+     
+     
+     document.getElementById(newmarioParent).appendChild(mario);
+     stepcount++;
+           console.log("step count  :"+ stepcount);
+  
+           if(a.length==0 && b.length==0){
+            document.write("<center><b>congratulations you win the game !!<b><br> your score is"+ stepcount+"</center");
+            e.preventDefault();
+                return false; 
+  
+}
+ cl= setTimeout(function(){ upmove(); }, 1000);
+ 
+} 
+ else {
+  downmove();
+}
+
 		  }
 		  
 		  
 		  
-		  function rightmove(){
-var marioParent = document.getElementById('mario').parentNode.id;
+		  function  rightmove(){
+            
+            var marioParent = document.getElementById('mario').parentNode.id;
 
-var arrayParent=marioParent.split("-");
-var mario=document.getElementById('mario');
-var newmarioParent;
-var count=0;
-		arrayParent[1]++;
-		if(arrayParent[1]<=col){
-	                 document.getElementById(marioParent).removeChild(mario);
-                      
-                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
-						 if(a.indexOf(arrayParent[1]) != -1) {
-   var iPosition = a.indexOf(arrayParent[1]);
-
-   if(b[iPosition] == arrayParent[0]){
-     document.getElementById(newmarioParent).firstChild.remove()
-   }
-						 
-             }           document.getElementById(newmarioParent).appendChild(mario);
+        var arrayParent = marioParent.split("-");
+        console.log(arrayParent[0]+" "+arrayParent[1]);
+        var mario = document.getElementById('mario');
+        var newmarioParent;
 
 
+        if (arrayParent[1] < (col-1)) {
+          arrayParent[1]++;
+          document.getElementById(marioParent).removeChild(mario);
+          newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+          var newmarioParentsp=newmarioParent.split("-");
+          console.log(newmarioParent[1]);
+          console.log(a);
+          console.log(b);
+          
+          
 
-	  
+          var results = [];
+for (var i=0; i < a.length; i++ ){
+    if ( a[i] == newmarioParentsp[0] ){
+        results.push( i );
+    }
+}
+var count =0;
+
+console.log("value of a  "+a);
+          console.log("value  of b"+b);
+for(var j=0;j<results.length;j++){
+if(b[results[j]]==newmarioParentsp[1]){
+   
+   count++;
+   a.splice(results[j],1);
+   b.splice(results[j],1);
+    break;
+}
+
+
+}
+
+
+console.log("value of a  "+a);
+          console.log("value  of b"+b);
+// if ( count> -1) {
+//   array.splice(index, 2);
+// }
+if(count>0){
+    document.getElementById(newmarioParent).firstChild.remove();
+    
+ 
+    console.log("avilable");
+}
+console.log("value of a  "+a);
+          console.log("value  of b"+b);
+
+             
+             
+             document.getElementById(newmarioParent).appendChild(mario);
+          
+             stepcount++;
+           console.log("step count  :"+ stepcount);
+
+            if(a.length==0 && b.length==0){
+                document.write("<center><b>congratulations you win the game !!<b><br> your score is"+ stepcount+"</center>");
+                e.preventDefault();
+                return false; 
+   
+}
+         
+       cl=   setTimeout(function(){ rightmove(); }, 1000);
+     
+        } 
+         else {
+          leftmove();
+        }
+}
+
 	   
-	   return setTimeout(rightmove, 1000);
-               }else{
-			   return setTimeout(leftmove, 1000);
-			   }
-	   console.log("mario right"+newmarioParent);
-	   
-	   }
 	   
 	   
 	   function downmove(){
-	   var marioParent = document.getElementById('mario').parentNode.id;
+        var marioParent = document.getElementById('mario').parentNode.id;
 
-var arrayParent=marioParent.split("-");
-var mario=document.getElementById('mario');
+var arrayParent = marioParent.split("-");
+console.log(arrayParent[0]+" "+arrayParent[1]);
+var mario = document.getElementById('mario');
 var newmarioParent;
-var count=0;
-		 arrayParent[0]++;
-		             if(arrayParent[0]<=row){
-	                 document.getElementById(marioParent).removeChild(mario);
-                      
-                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
-						 if(a.indexOf(arrayParent[0]) != -1) {
-   var iPosition = a.indexOf(arrayParent[0]);
-
-   if(b[iPosition] == arrayParent[1]){
-     document.getElementById(newmarioParent).firstChild.remove()
-   }
-					 
-            }            document.getElementById(newmarioParent).appendChild(mario);
 
 
+if (arrayParent[0] < (row-1)) {
+  arrayParent[0]++;
+  document.getElementById(marioParent).removeChild(mario);
+  newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+  var newmarioParentsp=newmarioParent.split("-");
+  console.log(newmarioParent[1]);
+  console.log(a);
+  console.log(b);
+  
+  
 
-	   
-	      return setTimeout(downmove, 1000);
-               }else{
-			   return setTimeout(upmove, 1000);
-			   }
-	   console.log("mario down"+newmarioParent);
-	   
-	   }
-	
-	}
+  var results = [];
+for (var i=0; i < a.length; i++ ){
+if ( a[i] == newmarioParentsp[0] ){
+results.push( i );
+}
+}
+var count =0;
+
+console.log("value of a  "+a);
+  console.log("value  of b"+b);
+for(var j=0;j<results.length;j++){
+if(b[results[j]]==newmarioParentsp[1]){
+
+count++;
+a.splice(results[j],1);
+b.splice(results[j],1);
+break;
+}
+
+
+}
+
+
+console.log("value of a  "+a);
+  console.log("value  of b"+b);
+// if ( count> -1) {
+//   array.splice(index, 2);
+// }
+if(count>0){
+document.getElementById(newmarioParent).firstChild.remove();
+
+
+console.log("avilable");
+}
+console.log("value of a  "+a);
+  console.log("value  of b"+b);
+
+     
+     
+     document.getElementById(newmarioParent).appendChild(mario);
+     stepcount++;
+           console.log("step count  :"+ stepcount);
+  
+
+   if(a.length==0 && b.length==0){
+    document.write("<center><b>congratulations you win the game !!<b><br> your score is"+ stepcount+"</center");
+    e.preventDefault();
+                return false; 
+
+  
+}
+ 
+ cl= setTimeout(function(){ downmove(); }, 1000);
+ 
+} 
+ else {
+  upmove();
+}
+       }
+        }
+         
+       
+
+    }
+    
+
+     
 
 </script>
-</head>
-<body>
-<center>
-Enter the no of rows :<input type="text" id="row"><br><br>
-Enter the no of cols :<input type="text" id="col"><br><br>
-<button onclick="gamegenrate()">Genrate game</button><br><br>
-<div id="t">
 
-</div>
+</html>
 
-</center>
-</body>
+
+
 </html>
