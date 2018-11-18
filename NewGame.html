@@ -1,0 +1,244 @@
+<html>
+    <head>
+        <style>
+            tr,td{
+                height:100;
+                width:100;
+            }
+        </style>
+        <script>
+		        var a = [];
+                var b = [];
+            function gameGenrate() {
+                var row = document.getElementById("row").value;
+                var col = document.getElementById("col").value;
+               
+
+                var mx = Math.floor((Math.random() * row) + 1);
+                var my = Math.floor((Math.random() * col) + 1);
+                
+				var i = 0;
+            while (i < row) {
+              
+
+                var r1 = Math.floor((Math.random() * row) + 0);
+                var r2 = Math.floor((Math.random() * row) + 0);
+                var temp = 0;
+
+                if (a.length == 0 && b.length == 0) {
+                    a[i] = r1;
+                    b[i] = r2;
+                    i++;
+                }
+                else {
+                    for (k = 0; k < i; k++) {
+                        if (a[k] == r1 && b[k] == r2) {
+                            break;
+                        }
+                        else {
+                            temp++;
+                        }
+                    }
+                    if (temp == i) {
+                        a[i] = r1;
+                        b[i] = r2;
+                        i++;
+                    }
+                }
+
+            }
+          console.log(a);
+            console.log(b);
+                var table = '';
+
+                for (var i = 0; i < row; i++) {
+                table += '<tr>'
+                        var result=[];
+                for (var j = 0; j < a.length; j++) {
+                    
+                    if (a[j] == i) {
+                        result.push(j);
+                        //result_value.push(b[j]);
+                    
+                    }
+                }
+                console.log(result);
+                var clarrB=[];
+                for(var m=0;m<result.length;m++){
+                       
+                       clarrB.push(b[result[m]]);
+                   
+                   }
+
+                for (var k = 0; k < row; k++) {
+                    var cols = document.createElement('td');
+                       if(clarrB.indexOf(k)!=-1){
+
+                           table += '<td id=' + i + -+k + '>+ '<img src="mushroom-512_f9ma5t.png" id="food">' +</td>'
+                       }
+                    else
+                    {
+                        table += '<td id=' + i + -+k + '></td>'
+                    }
+
+
+                }
+
+                table += '</tr>'
+            }
+
+				+ '<img src="1200x630bb_vokqee.jpg" id=mario>' +
+                document.getElementById("t").innerHTML = '<table  border=1>' + table + '</table>';
+                document.getElementById("t").innerHTML = '<table  border=1>' + table + '</table>';
+                document.onkeydown = function (e) {
+                    switch (e.keyCode) {
+                        case 37:
+                            leftMove();
+                            break;
+                        case 38:
+                            upMove();
+
+                            break;
+
+                        case 39:
+
+                            rightMove();
+                            break;
+                        case 40:
+                            downMove();
+
+                            break;
+                    }
+                }
+
+
+                function leftMove() {
+                    var marioParent = document.getElementById('mario').parentNode.id;
+
+                    var arrayParent = marioParent.split("-");
+                    var mario = document.getElementById('mario');
+                    var newmarioParent;
+
+
+                    arrayParent[1]--;
+                    if (arrayParent[1] >= 1) {
+                        document.getElementById(marioParent).removeChild(mario);
+                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+                        if (a.indexOf(arrayParent[1]) != -1) {
+                            var iPosition = a.indexOf(arrayParent[1]);
+                            if (b[iPosition] == arrayParent[0]) {
+                                document.getElementById(newmarioParent).firstChild.remove();
+                            }
+                        }
+                        document.getElementById(newmarioParent).appendChild(mario);
+
+                        return setTimeout(function(){ leftmove(); }, 1000);
+                    }
+					
+                }
+
+
+                function upMove() {
+
+                    var marioParent = document.getElementById('mario').parentNode.Id;
+
+                    var arrayParent = marioParent.split("-");
+                    var mario = document.getElementById('mario');
+                    var newmarioParent;
+                    var count = 0;
+                    count++
+                    arrayParent[0]--;
+                    if (arrayParent[0] >= 1) {
+                        document.getElementById(marioParent).removeChild(mario);
+
+                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+                        if (a.indexOf(arrayParent[0]) != -1) {
+                            var iPosition = a.indexOf(arrayParent[0]);
+
+                            if (b[iPosition] == arrayParent[1]) {
+                                document.getElementById(newmarioParent).firstChild.remove()
+                            }
+                        }
+
+                        document.getElementById(newmarioParent).appendChild(mario);
+
+
+
+
+                        return setTimeout(upMove, 1000);
+                    } 
+                    
+                }
+
+
+
+                function rightMove() {
+                    var marioParent = document.getElementById('mario').parentNode.id;
+
+                    var arrayParent = marioParent.split("-");
+                    var mario = document.getElementById('mario');
+                    var newmarioParent;
+                    var count = 0;
+                    arrayParent[1]++;
+                    if (arrayParent[1] <= col) {
+                        document.getElementById(marioParent).removeChild(mario);
+
+                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+                        if (a.indexOf(arrayParent[1]) != -1) {
+                            var iPosition = a.indexOf(arrayParent[1]);
+
+                            if (b[iPosition] == arrayParent[0]) {
+                                document.getElementById(newmarioParent).firstChild.remove();
+                            }
+
+                        }
+                        document.getElementById(newmarioParent).appendChild(mario);
+
+                        return setTimeout(rightMove, 1000);
+                    } 
+                  
+                }
+
+
+                function downMove() {
+                    var marioParent = document.getElementById('mario').parentNode.Id;
+
+                    var arrayParent = marioParent.split("-");
+                    var mario = document.getElementById('mario');
+                    var newmarioParent;
+                    
+                    arrayParent[0]++;
+                    if (arrayParent[0] <= row) {
+                        document.getElementById(marioParent).removeChild(mario);
+
+                        newmarioParent = arrayParent[0] + "-" + arrayParent[1];
+                        if (a.indexOf(arrayParent[0]) != -1) {
+                            var iPosition = a.indexOf(arrayParent[0]);
+
+                            if (b[iPosition] == arrayParent[1]) {
+                                document.getElementById(newmarioParent).firstChild.remove();
+                            }
+
+                        }
+                        document.getElementById(newmarioParent).appendChild(mario);
+
+                        return setTimeout(downMove, 1000);
+                    }
+                   
+                }
+            }
+
+        </script>
+    </head>
+    <body>
+    <center>
+        Enter the no of rows :<input type="text" id="row"><br><br>
+        Enter the no of cols :<input type="text" id="col"><br><br>
+        <button onclick="gameGenrate()">Genrate Game</button><br><br>
+        <div id="t">
+
+        </div>
+
+    </center>
+</body>
+</html>
